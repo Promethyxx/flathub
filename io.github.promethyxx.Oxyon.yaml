@@ -78,19 +78,6 @@ modules:
             sha256: 23815a6d095696f7919090fdc3e2f9459b2c83d57224b2e446ce1f5f7333ef36
         cleanup:
           - '*'
-  - name: pandoc
-    buildsystem: simple
-    build-commands:
-      - find . -name pandoc -type f -exec install -Dm755 {} /app/bin/pandoc \;
-    sources:
-      - type: archive
-        url: https://github.com/jgm/pandoc/releases/download/3.6.3/pandoc-3.6.3-linux-amd64.tar.gz
-        sha256: d04c95c138202f87d6b00ac19aa3dd874c681f60a9feb3b55c74f764d6d1a17d
-        only-arches: [x86_64]
-      - type: archive
-        url: https://github.com/jgm/pandoc/releases/download/3.6.3/pandoc-3.6.3-linux-arm64.tar.gz
-        sha256: 4e774cb1bdb6e56bc55b8eb79200bd9aa6a39905a04ecda7267f5149116f0881
-        only-arches: [aarch64]
   - name: oxyon
     buildsystem: simple
     build-commands:
@@ -102,6 +89,6 @@ modules:
     sources:
       - type: git
         url: https://github.com/Promethyxx/oxyon.git
-        tag: 1.5.0
-        commit: 4c315cdacbd873799605f1c1f4c90290807972ce
+        tag: 1.5.3
+        commit: af2f5ea762f04277760d584e44c298196c159fb6
       - cargo-sources.json
