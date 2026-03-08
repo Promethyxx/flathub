@@ -7,7 +7,6 @@ sdk-extensions:
 command: Oxyon
 finish-args:
   - --share=ipc
-  - --talk-name=org.freedesktop.portal.Desktop
   - --share=network
   - --socket=wayland
   - --socket=fallback-x11
