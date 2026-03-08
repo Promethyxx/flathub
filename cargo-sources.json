@@ -1861,19 +1861,6 @@
     {
         "type": "archive",
         "archive-type": "tar-gzip",
-        "url": "https://static.crates.io/crates/env_home/env_home-0.1.0.crate",
-        "sha256": "c7f84e12ccf0a7ddc17a6c41c93326024c42920d7ee630d04950e6926645c0fe",
-        "dest": "cargo/vendor/env_home-0.1.0"
-    },
-    {
-        "type": "inline",
-        "contents": "{\"package\": \"c7f84e12ccf0a7ddc17a6c41c93326024c42920d7ee630d04950e6926645c0fe\", \"files\": {}}",
-        "dest": "cargo/vendor/env_home-0.1.0",
-        "dest-filename": ".cargo-checksum.json"
-    },
-    {
-        "type": "archive",
-        "archive-type": "tar-gzip",
         "url": "https://static.crates.io/crates/epaint/epaint-0.33.3.crate",
         "sha256": "009d0dd3c2163823a0abdb899451ecbc78798dec545ee91b43aff1fa790bab62",
         "dest": "cargo/vendor/epaint-0.33.3"
@@ -7594,14 +7581,14 @@
     {
         "type": "archive",
         "archive-type": "tar-gzip",
-        "url": "https://static.crates.io/crates/which/which-8.0.1.crate",
-        "sha256": "3a824aeba0fbb27264f815ada4cff43d65b1741b7a4ed7629ff9089148c4a4e0",
-        "dest": "cargo/vendor/which-8.0.1"
+        "url": "https://static.crates.io/crates/which/which-8.0.2.crate",
+        "sha256": "81995fafaaaf6ae47a7d0cc83c67caf92aeb7e5331650ae6ff856f7c0c60c459",
+        "dest": "cargo/vendor/which-8.0.2"
     },
     {
         "type": "inline",
-        "contents": "{\"package\": \"3a824aeba0fbb27264f815ada4cff43d65b1741b7a4ed7629ff9089148c4a4e0\", \"files\": {}}",
-        "dest": "cargo/vendor/which-8.0.1",
+        "contents": "{\"package\": \"81995fafaaaf6ae47a7d0cc83c67caf92aeb7e5331650ae6ff856f7c0c60c459\", \"files\": {}}",
+        "dest": "cargo/vendor/which-8.0.2",
         "dest-filename": ".cargo-checksum.json"
     },
     {
@@ -8343,19 +8330,6 @@
         "type": "inline",
         "contents": "{\"package\": \"b68db261ef59e9e52806f688020631e987592bd83619edccda9c47d42cde4f6c\", \"files\": {}}",
         "dest": "cargo/vendor/winres-0.1.12",
-        "dest-filename": ".cargo-checksum.json"
-    },
-    {
-        "type": "archive",
-        "archive-type": "tar-gzip",
-        "url": "https://static.crates.io/crates/winsafe/winsafe-0.0.19.crate",
-        "sha256": "d135d17ab770252ad95e9a872d365cf3090e3be864a34ab46f48555993efc904",
-        "dest": "cargo/vendor/winsafe-0.0.19"
-    },
-    {
-        "type": "inline",
-        "contents": "{\"package\": \"d135d17ab770252ad95e9a872d365cf3090e3be864a34ab46f48555993efc904\", \"files\": {}}",
-        "dest": "cargo/vendor/winsafe-0.0.19",
         "dest-filename": ".cargo-checksum.json"
     },
     {
