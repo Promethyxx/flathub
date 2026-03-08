@@ -81,8 +81,7 @@ modules:
   - name: Oxyon
     buildsystem: simple
     build-commands:
-      build-commands:
-      - cargo build --release --offline
+      - cargo build --release --offline --no-default-features --features api
       - install -Dm755 target/release/Oxyon /app/bin/Oxyon
       - install -Dm644 assets/io.github.promethyxx.Oxyon.desktop /app/share/applications/io.github.promethyxx.Oxyon.desktop
       - install -Dm644 assets/io.github.promethyxx.Oxyon.metainfo.xml /app/share/metainfo/io.github.promethyxx.Oxyon.metainfo.xml
