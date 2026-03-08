@@ -89,6 +89,6 @@ modules:
     sources:
       - type: git
         url: https://github.com/Promethyxx/oxyon.git
-        tag: 1.7.0
-        commit: b2b48603b1875985c10f768e5b4faf997752ea47
+        tag: 2.0.2
+        commit: f9a3bd340bc4934646931eea5452740c6135930c
       - cargo-sources.json
