@@ -4,7 +4,7 @@ runtime-version: '6.10'
 sdk: org.kde.Sdk
 sdk-extensions:
   - org.freedesktop.Sdk.Extension.rust-stable
-command: oxyon
+command: Oxyon
 finish-args:
   - --share=ipc
   - --share=network
@@ -15,7 +15,7 @@ finish-args:
 build-options:
   append-path: /usr/lib/sdk/rust-stable/bin
   env:
-    CARGO_HOME: /run/build/oxyon/cargo
+    CARGO_HOME: /run/build/Oxyon/cargo
 cleanup:
   - /include
   - /lib/cmake
@@ -78,17 +78,18 @@ modules:
             sha256: 23815a6d095696f7919090fdc3e2f9459b2c83d57224b2e446ce1f5f7333ef36
         cleanup:
           - '*'
-  - name: oxyon
+  - name: Oxyon
     buildsystem: simple
     build-commands:
-      - cargo build --offline --profile dist --no-default-features --features api
-      - install -Dm755 target/dist/oxyon /app/bin/oxyon
+      build-commands:
+      - cargo build --release --offline
+      - install -Dm755 target/release/Oxyon /app/bin/Oxyon
       - install -Dm644 assets/io.github.promethyxx.Oxyon.desktop /app/share/applications/io.github.promethyxx.Oxyon.desktop
       - install -Dm644 assets/io.github.promethyxx.Oxyon.metainfo.xml /app/share/metainfo/io.github.promethyxx.Oxyon.metainfo.xml
       - install -Dm644 assets/Oxyon_icon.png /app/share/icons/hicolor/512x512/apps/io.github.promethyxx.Oxyon.png
     sources:
       - type: git
-        url: https://github.com/Promethyxx/oxyon.git
+        url: https://github.com/Promethyxx/Oxyon.git
         tag: 2.0.2
         commit: f9a3bd340bc4934646931eea5452740c6135930c
       - cargo-sources.json
