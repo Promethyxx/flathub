@@ -1,0 +1,108 @@
+app-id: io.github.promethyxx.Oxytools
+runtime: org.kde.Platform
+runtime-version: '6.10'
+sdk: org.kde.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.rust-stable
+command: Oxytools
+finish-args:
+  - --share=ipc
+  - --share=network
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --device=dri
+  - --filesystem=home
+build-options:
+  append-path: /usr/lib/sdk/rust-stable/bin
+  env:
+    CARGO_HOME: /run/build/Oxytools/cargo
+cleanup:
+  - /include
+  - /lib/cmake
+  - /lib/pkgconfig
+  - /share/doc
+  - /share/man
+  - '*.a'
+  - '*.la'
+modules:
+  # boost 1.91.0 (2026-04-22) — deps: filesystem,system
+  # sha256 du tar.bz2 à vérifier sur https://archives.boost.io/release/1.91.0/source/boost_1_91_0.tar.bz2.json
+  - name: boost
+    buildsystem: simple
+    build-commands:
+      - ./bootstrap.sh --prefix=/app --with-libraries=filesystem
+      - ./b2 -j $FLATPAK_BUILDER_N_JOBS install
+    sources:
+      - type: archive
+        url: https://archives.boost.io/release/1.91.0/source/boost_1_91_0.tar.bz2
+        sha256: de5e6b0e4913395c6bdfa90537febd9028ea4c0735d2cdb0cd9b45d5f51264f5
+
+  # cmark 0.31.2 (2025-02-14)
+  - name: cmark
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DCMARK_STATIC=OFF
+    sources:
+      - type: archive
+        url: https://github.com/commonmark/cmark/archive/refs/tags/0.31.2.tar.gz
+        sha256: f9bc5ca38bcb0b727f0056100fac4d743e768872e3bacec7746de28f5700d697
+
+  # libdvdcss 1.5.0 (2025-11-09)
+  - name: libdvdcss
+    buildsystem: meson
+    sources:
+      - type: archive
+        url: https://download.videolan.org/pub/libdvdcss/1.5.0/libdvdcss-1.5.0.tar.xz
+        sha256: 529463e4d1befef82e5c6e470db7661a2db0343e092a2fb0d6c037cab8a5c399
+
+  # libdvdread 7.0.1 (2025-11-09)
+  - name: libdvdread
+    buildsystem: meson
+    sources:
+      - type: archive
+        url: https://download.videolan.org/pub/videolan/libdvdread/7.0.1/libdvdread-7.0.1.tar.xz
+        sha256: 2e3e04a305c15c3963aa03ae1b9a83c1d239880003fcf3dde986d3943355d407
+
+  # mkvtoolnix 98.0 (2026-04-05) — construit uniquement mkvpropedit
+  - name: mkvtoolnix
+    buildsystem: simple
+    build-commands:
+      - ./configure
+        --enable-optimization
+        --prefix=/app
+        --with-boost=/app
+        --with-docbook-xsl-root=/usr/share/xml/docbook/xml/xsl-stylesheets
+        --disable-update-check
+        --disable-gui
+      - ./drake -j $FLATPAK_BUILDER_N_JOBS apps:mkvpropedit
+      - install -Dm755 src/mkvpropedit /app/bin/mkvpropedit
+    sources:
+      - type: archive
+        url: https://mkvtoolnix.download/sources/mkvtoolnix-98.0.tar.xz
+        sha256: 1600f4a768ede6356e70785393f02f34dd54fbb5f661ffe6e7e8bc0f40229b79
+    modules:
+      # ruby 4.0.4 (2026-05-11) — outil de build uniquement, cleanup total
+      - name: ruby
+        sources:
+          - type: archive
+            url: https://cache.ruby-lang.org/pub/ruby/4.0/ruby-4.0.4.tar.gz
+            sha256: f35f6edfa3dabb3f723f9d0cf1906c6512ae77f4e412ab1e68cc6e91d230fa80
+        cleanup:
+          - '*'
+
+  # Oxytools 2.0.6 — tag: 2.0.6, commit: 1d4ac6c
+  - name: Oxytools
+    buildsystem: simple
+    build-commands:
+      - cargo build --profile dist --offline --no-default-features --features api
+      - install -Dm755 target/dist/Oxytools /app/bin/Oxytools
+      - install -Dm644 assets/io.github.promethyxx.Oxytools.desktop /app/share/applications/io.github.promethyxx.Oxytools.desktop
+      - install -Dm644 assets/io.github.promethyxx.Oxytools.metainfo.xml /app/share/metainfo/io.github.promethyxx.Oxytools.metainfo.xml
+      - install -Dm644 assets/Oxytools_icon.png /app/share/icons/hicolor/512x512/apps/io.github.promethyxx.Oxytools.png
+    sources:
+      - type: git
+        url: https://github.com/Promethyxx/Oxytools.git
+        commit: 65fe6e5e987799e14635950c0b7a87586f5ca219
+      - cargo-sources.json
