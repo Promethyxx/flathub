@@ -92,7 +92,7 @@ modules:
         cleanup:
           - '*'
 
-  # Oxytools 2.0.6 — tag: 2.0.6, commit: 1d4ac6c
+  # Oxytools 3.0.4 — tag: 3.0.4, commit: e1f3bee
   - name: Oxytools
     buildsystem: simple
     build-commands:
@@ -104,5 +104,5 @@ modules:
     sources:
       - type: git
         url: https://github.com/Promethyxx/Oxytools.git
-        commit: 65fe6e5e987799e14635950c0b7a87586f5ca219
+        commit: e1f3bee752fbb321897bb3438c39541cb1452f6a
       - cargo-sources.json
