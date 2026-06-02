@@ -25,7 +25,7 @@ cleanup:
   - '*.a'
   - '*.la'
 modules:
-  # Oxyshop 0.6.4 — commit: f843cab7be099012487acf7877caa65c17150ad4
+  # Oxyshop 0.6.4 — commit: 20ac3d2b460172d71110672c81a605327cafb0d2
   - name: Oxyshop
     buildsystem: simple
     build-commands:
@@ -37,5 +37,5 @@ modules:
     sources:
       - type: git
         url: https://github.com/Promethyxx/Oxyshop.git
-        commit: f843cab7be099012487acf7877caa65c17150ad4
+        commit: 20ac3d2b460172d71110672c81a605327cafb0d2
       - cargo-sources.json
