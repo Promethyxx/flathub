@@ -1,0 +1,41 @@
+app-id: io.github.promethyxx.Oxycash
+runtime: org.kde.Platform
+runtime-version: '6.10'
+sdk: org.kde.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.rust-stable
+command: Oxycash
+finish-args:
+  - --share=ipc
+  - --share=network
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --device=dri
+  - --filesystem=home
+build-options:
+  append-path: /usr/lib/sdk/rust-stable/bin
+  env:
+    CARGO_HOME: /run/build/Oxycash/cargo
+cleanup:
+  - /include
+  - /lib/cmake
+  - /lib/pkgconfig
+  - /share/doc
+  - /share/man
+  - '*.a'
+  - '*.la'
+modules:
+  # Oxycash 0.6.3 — commit: 74c8e160fb407fc591fd4b9f79f36884af20b702
+  - name: Oxycash
+    buildsystem: simple
+    build-commands:
+      - cargo build --release --offline --features="desktop"
+      - install -Dm755 target/release/Oxycash /app/bin/Oxycash
+      - install -Dm644 assets/io.github.promethyxx.Oxycash.desktop /app/share/applications/io.github.promethyxx.Oxycash.desktop
+      - install -Dm644 assets/io.github.promethyxx.Oxycash.metainfo.xml /app/share/metainfo/io.github.promethyxx.Oxycash.metainfo.xml
+      - install -Dm644 assets/Oxycash_icon.png /app/share/icons/hicolor/512x512/apps/io.github.promethyxx.Oxycash.png
+    sources:
+      - type: git
+        url: https://github.com/Promethyxx/Oxycash.git
+        commit: 74c8e160fb407fc591fd4b9f79f36884af20b702
+      - cargo-sources.json

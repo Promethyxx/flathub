@@ -1,0 +1,41 @@
+app-id: io.github.promethyxx.Oxyshop
+runtime: org.kde.Platform
+runtime-version: '6.10'
+sdk: org.kde.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.rust-stable
+command: Oxyshop
+finish-args:
+  - --share=ipc
+  - --share=network
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --device=dri
+  - --filesystem=home
+build-options:
+  append-path: /usr/lib/sdk/rust-stable/bin
+  env:
+    CARGO_HOME: /run/build/Oxyshop/cargo
+cleanup:
+  - /include
+  - /lib/cmake
+  - /lib/pkgconfig
+  - /share/doc
+  - /share/man
+  - '*.a'
+  - '*.la'
+modules:
+  # Oxyshop 0.6.4 — commit: 1868c6f7775375927ce97455e2b380acb36ffad1
+  - name: Oxyshop
+    buildsystem: simple
+    build-commands:
+      - cargo build --release --offline --features="desktop"
+      - install -Dm755 target/release/Oxyshop /app/bin/Oxyshop
+      - install -Dm644 assets/io.github.promethyxx.Oxyshop.desktop /app/share/applications/io.github.promethyxx.Oxyshop.desktop
+      - install -Dm644 assets/io.github.promethyxx.Oxyshop.metainfo.xml /app/share/metainfo/io.github.promethyxx.Oxyshop.metainfo.xml
+      - install -Dm644 assets/Oxyshop_icon.png /app/share/icons/hicolor/512x512/apps/io.github.promethyxx.Oxyshop.png
+    sources:
+      - type: git
+        url: https://github.com/Promethyxx/Oxyshop.git
+        commit: 1868c6f7775375927ce97455e2b380acb36ffad1
+      - cargo-sources.json
