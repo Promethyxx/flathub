@@ -25,7 +25,7 @@ cleanup:
   - '*.a'
   - '*.la'
 modules:
-  # Oxycash 0.6.3 — commit: 74c8e160fb407fc591fd4b9f79f36884af20b702
+  # Oxycash 0.6.3 — commit: 6a7b4de63a63fa3b8a6f2ad37260738d3f1bb0c8
   - name: Oxycash
     buildsystem: simple
     build-commands:
@@ -37,5 +37,5 @@ modules:
     sources:
       - type: git
         url: https://github.com/Promethyxx/Oxycash.git
-        commit: 74c8e160fb407fc591fd4b9f79f36884af20b702
+        commit: 6a7b4de63a63fa3b8a6f2ad37260738d3f1bb0c8
       - cargo-sources.json
